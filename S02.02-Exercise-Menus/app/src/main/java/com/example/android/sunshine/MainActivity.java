@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (R.id.action_refresh == item.getItemId()){
+            mWeatherTextView.setText("");
             loadWeatherData();
             return true;
         }

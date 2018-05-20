@@ -15,9 +15,13 @@
  */
 package com.example.android.sunshine.utilities;
 
+import android.net.Uri;
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -42,6 +46,9 @@ public final class NetworkUtils {
      * a real API.If you want to connect your app to OpenWeatherMap's API, feel free to! However,
      * we are not going to show you how to do so in this course.
      */
+    private static final String OPEN_WEATHER_API = "https://api.openweathermap.org/data/2.5/forecast";
+    private static final String APP_ID = "APPID";
+    private static final String appKey = "e1754992b8a161512e555e4004503d9f";
 
     /* The format we want our API to return */
     private static final String format = "json";
@@ -65,7 +72,21 @@ public final class NetworkUtils {
      * @return The URL to use to query the weather server.
      */
     public static URL buildUrl(String locationQuery) {
-        // TODO (1) Fix this method to return the URL used to query Open Weather Map's API
+        // TODO (1)(ok) Fix this method to return the URL used to query Open Weather Map's API
+        Uri uri = Uri.parse(OPEN_WEATHER_API).buildUpon()
+                .appendQueryParameter(QUERY_PARAM, locationQuery)
+                .appendQueryParameter(APP_ID, appKey)
+                .appendQueryParameter(FORMAT_PARAM, format)
+                .appendQueryParameter(UNITS_PARAM, units)
+                .appendQueryParameter(DAYS_PARAM, String.valueOf(numDays))
+                .build();
+        try {
+            return new URL(
+                    uri.toString()
+            );
+        } catch (MalformedURLException e) {
+            Log.d(TAG, "buildUrl: " + uri.toString());
+        }
         return null;
     }
 

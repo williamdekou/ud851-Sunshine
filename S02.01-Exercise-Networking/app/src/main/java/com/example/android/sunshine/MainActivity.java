@@ -22,6 +22,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
 
 import java.io.IOException;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO (8)(ok) Create a method that will get the user's preferred location and execute your new AsyncTask and call it loadWeatherData
     void loadWeatherData() {
-        new OpenWeatherMapQueryTask().execute(NetworkUtils.buildUrl("london"));
+        new OpenWeatherMapQueryTask().execute(NetworkUtils.buildUrl(SunshinePreferences.getPreferredWeatherLocation(MainActivity.this)));
     }
     // TODO (5)(ok) Create a class that extends AsyncTask to perform network requests
     class OpenWeatherMapQueryTask extends AsyncTask<URL, Void, String> {

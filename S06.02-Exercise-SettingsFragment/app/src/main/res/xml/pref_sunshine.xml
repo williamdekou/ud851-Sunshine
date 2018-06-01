@@ -4,6 +4,14 @@
     android:key="@string/pref_location_key"
     android:defaultValue="@string/pref_location_default"
     android:title="@string/pref_location_label"
+    android:inputType="text"
+    android:singleLine="true"
     />
 
+    <ListPreference
+        android:defaultValue="@string/pref_units_metric"
+        android:key="@string/pref_units_key"
+        android:entries="@array/pref_units_options"
+        android:entryValues="@array/pref_units_values"
+        android:title="@string/pref_units_label"/>
 </PreferenceScreen>
